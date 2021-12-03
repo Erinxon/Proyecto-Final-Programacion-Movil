@@ -10,6 +10,11 @@
 <ion-content>
   <div *ngIf="negocio">
     <ion-card>
+      <ion-card-content>
+        <ion-img [src]="negocio.foto" *ngIf="negocio.foto"></ion-img>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
       <ion-card-header>
         <ion-card-title>Nombre del Negocio</ion-card-title>
       </ion-card-header>
@@ -27,14 +32,6 @@
     </ion-card>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Foto</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-img [src]="negocio.foto" *ngIf="negocio.foto"></ion-img>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
         <ion-card-title>Teléfono</ion-card-title>
       </ion-card-header>
       <ion-card-content>
@@ -47,6 +44,22 @@
       </ion-card-header>
       <ion-card-content>
         <p>{{negocio.direccion}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Fecha de Creación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.fechaCreacion | date: 'dd/MM/yyyy'}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Fecha de Actualización</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.fechaActualizacion | date: 'dd/MM/yyyy'}}</p>
       </ion-card-content>
     </ion-card>
   </div>

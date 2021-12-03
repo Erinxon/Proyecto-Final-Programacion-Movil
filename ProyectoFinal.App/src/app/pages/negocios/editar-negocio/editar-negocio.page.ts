@@ -15,6 +15,7 @@ import { BaseComponent } from 'src/app/shared/BaseComponent/base-component';
 export class EditarNegocioPage extends BaseComponent implements OnInit, OnDestroy {
   negocio: Negocio;
   isLoanding: boolean = true;
+  isLoandingEdi: boolean = false;;
   constructor(
     protected negocioService: NegocioService,
     protected router: ActivatedRoute,
@@ -32,8 +33,8 @@ export class EditarNegocioPage extends BaseComponent implements OnInit, OnDestro
   ngOnInit() {
     const id = this.router.snapshot.paramMap.get('id');
     this.negocioService.getNegocio(id).subscribe((resp) => {
-      this.negocio = resp.data;
-      this.form.patchValue(this.negocio);
+      this.negocio = {...resp.data};
+      this.form.patchValue({...this.negocio});
       this.isLoanding = false;
     }, error => {
       this.isLoanding = false;
@@ -41,15 +42,15 @@ export class EditarNegocioPage extends BaseComponent implements OnInit, OnDestro
   }
 
   onSubmit() {
-    this.isLoanding = true;
+    this.isLoandingEdi = true;
     const negocio: AddNegocioModel = {
       ...this.form.value,
     };
     this.negocioService.updateNegocio(this.negocio.id, negocio).subscribe((resp) => {
-      this.isLoanding = false;
+      this.isLoandingEdi = false;
       this.route.navigate(['/negocios'], { replaceUrl: true });
     }, err => {
-      this.isLoanding = false;
+      this.isLoandingEdi = false;
     });
   
   }

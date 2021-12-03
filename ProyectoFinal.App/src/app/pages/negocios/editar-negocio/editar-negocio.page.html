@@ -42,10 +42,10 @@
       <ion-button expand="block" color="secondary" (click)="getPicture()">
         <ion-icon name="camera-outline" ></ion-icon>&nbsp;Foto</ion-button>
       <ion-button expand="block" [disabled]="form.invalid" color="primary" (click)="onSubmit()">
-        <ng-container *ngIf="isLoanding;">
+        <ng-container *ngIf="isLoandingEdi;">
           <ion-spinner></ion-spinner>
         </ng-container>
-        <ng-container *ngIf="!isLoanding">
+        <ng-container *ngIf="!isLoandingEdi">
           Guardar
         </ng-container>
       </ion-button>

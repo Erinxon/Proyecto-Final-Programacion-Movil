@@ -102,6 +102,7 @@ namespace ProyectoFinal.Api.Controllers
                     var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
                     negocio.Nombre = negocioDto.Nombre;
                     negocio.TipoNegocio = negocioDto.TipoNegocio;
+                    negocio.Foto = negocioDto.Foto;
                     negocio.Telefono = negocioDto.Telefono;
                     negocio.Direccion = negocioDto.Direccion;
                     negocio.Ubicacion = geometryFactory.CreatePoint(new Coordinate(negocioDto.Longitud, negocioDto.Latitud));

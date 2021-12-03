@@ -28,9 +28,10 @@
         </ion-item> 
       </ion-item>
     </div>
+    <ion-label *ngIf="!loanding && negocios.length === 0">
+      <h2 style="text-align: center;">No hay secretos registrados</h2>
+    </ion-label>
   </ion-list>
   <app-spinner *ngIf="loanding"></app-spinner>
-  <ion-label *ngIf="!loanding && negocios.length === 0">
-    <h2 style="text-align: center;">No hay secretos registrados</h2>
-  </ion-label>
+
 </ion-content>

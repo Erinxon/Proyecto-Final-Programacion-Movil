@@ -5,6 +5,8 @@ export interface Negocio{
     foto: string;
     telefono: string;
     direccion: string;
+    fechaCreacion: Date;
+    fechaActualizacion: Date;
     latitud: number;
     longitud: number;
 }

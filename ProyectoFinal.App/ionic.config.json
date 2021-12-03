@@ -1,0 +1,7 @@
+{
+  "name": "ProyectoFinal.App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

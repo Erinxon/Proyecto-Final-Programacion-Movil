@@ -1,0 +1,54 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/negocios"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del Negocio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="negocio">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nombre del Negocio</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.nombre}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Tipo de negocio</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.tipoNegocio}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Foto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-img [src]="negocio.foto" *ngIf="negocio.foto"></ion-img>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Teléfono</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.tipoNegocio}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dirección</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{negocio.direccion}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <app-spinner *ngIf="isLoanding"></app-spinner>
+</ion-content>

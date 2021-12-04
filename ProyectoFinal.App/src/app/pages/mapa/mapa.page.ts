@@ -17,7 +17,7 @@ export class MapaPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.negocioService.getNegocios().subscribe((res) => {
+    this.negocioService.getNegociosMap().subscribe((res) => {
       this.negocios = res.data;
       this.showMapa();
     });

@@ -29,6 +29,25 @@ namespace ProyectoFinal.Api.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult<ApiResponse<List<NegocioDto>>>> GetAll([FromQuery] RequestParameter parameter)
+        {
+            var response = new ApiResponse<List<NegocioDto>>();
+            try
+            {
+                var negocios = await this._negocioServices.GetNegocios(parameter.PageNumber, parameter.PageSize);
+                var total = await this._negocioServices.GetTotalRegistros();
+                response.TotalRegistros = total;
+                response.Data = _mapper.Map<List<NegocioDto>>(negocios);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Succeeded = false;
+            }
+
+            return Ok(response);
+        }
+        [HttpGet("map")]
         public async Task<ActionResult<ApiResponse<List<NegocioDto>>>> GetAll()
         {
             var response = new ApiResponse<List<NegocioDto>>();

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AddNegocioModel } from '../models/addNegocioModel.model';
 import { ApiResponse } from '../models/apiResponse.model';
 import { Negocio } from '../models/negocio.model';
+import { RequestParameter } from '../models/requestParameter.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -14,13 +15,16 @@ export class NegocioService {
   private negocios: Negocio[] = [];
   private negocios$: BehaviorSubject<Negocio[]> = new BehaviorSubject<Negocio[]>(this.negocios);
 
-  constructor(private localStorageService: LocalStorageService, 
-    private http: HttpClient) {
+  constructor(private http: HttpClient) {
       
   }
 
-  getNegocios(): Observable<ApiResponse<Negocio[]>> {
-    return this.http.get<ApiResponse<Negocio[]>>(`${environment.apiUrl}`);
+  getNegocios(parameter: RequestParameter): Observable<ApiResponse<Negocio[]>> {
+    return this.http.get<ApiResponse<Negocio[]>>(`${environment.apiUrl}?PageNumber=${parameter.pageNumber}&PageSize=${parameter.pageSize}`);
+  }
+
+  getNegociosMap(): Observable<ApiResponse<Negocio[]>> {
+    return this.http.get<ApiResponse<Negocio[]>>(`${environment.apiUrl}/map`);
   }
 
   getNegocio(id: string): Observable<ApiResponse<Negocio>>  {

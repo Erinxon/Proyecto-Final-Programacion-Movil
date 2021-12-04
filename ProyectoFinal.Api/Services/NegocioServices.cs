@@ -16,10 +16,19 @@ namespace ProyectoFinal.Api.Services
         {
             this._context = context;
         }
+        public async Task<List<Negocio>> GetNegocios(int pageNumber, int pageSize)
+        {
+            var negocios = await this._context.Negocios
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return negocios;
+        }
+
         public async Task<List<Negocio>> GetNegocios()
         {
-            var negocios = await this._context.Negocios.
-                ToListAsync();
+            var negocios = await this._context.Negocios
+                .ToListAsync();
             return negocios;
         }
         public async Task<Negocio> GetNegocio(Guid id)
@@ -51,6 +60,11 @@ namespace ProyectoFinal.Api.Services
         {
             var negocio = await this.GetNegocio(id);
             return negocio is not null;
+        }
+
+        public async Task<int> GetTotalRegistros()
+        {
+            return await this._context.Negocios.CountAsync();
         }
     }
 }

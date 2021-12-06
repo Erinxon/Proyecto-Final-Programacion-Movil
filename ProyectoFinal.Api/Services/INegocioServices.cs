@@ -14,7 +14,6 @@ namespace ProyectoFinal.Api.Services
         public Task<int> CreateNegocio(Negocio negocio);
         public Task<int> UpdateNegocio(Negocio negocio);
         public Task<int> DeleteNegocio(Guid id);
-
         public Task<int> GetTotalRegistros();
     }
 }

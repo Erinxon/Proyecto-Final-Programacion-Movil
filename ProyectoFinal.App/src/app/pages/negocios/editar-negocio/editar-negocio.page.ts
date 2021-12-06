@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AddNegocioModel } from 'src/app/models/addNegocioModel.model';
 import { Negocio } from 'src/app/models/negocio.model';
 import { NegocioService } from 'src/app/services/negocio.service';
@@ -22,8 +23,9 @@ export class EditarNegocioPage extends BaseComponent implements OnInit, OnDestro
     protected fb: FormBuilder,
     protected photoService: PhotoService,
     protected route: Router,
+    protected alert: AlertController
   ){
-    super(negocioService, fb, photoService);
+    super(negocioService, fb, photoService,alert);
   }
   
   ngOnDestroy(): void {
@@ -46,12 +48,19 @@ export class EditarNegocioPage extends BaseComponent implements OnInit, OnDestro
     const negocio: AddNegocioModel = {
       ...this.form.value,
     };
+    this.updateNegocio(negocio);
+  }
+
+  updateNegocio(negocio: AddNegocioModel): void {
     this.negocioService.updateNegocio(this.negocio.id, negocio).subscribe((resp) => {
       this.isLoandingEdi = false;
+      this.showAlert('Negocio actualizado', 'El negocio se actualizo correctamente');
       this.route.navigate(['/negocios'], { replaceUrl: true });
     }, err => {
+      this.showAlert('Error', 'No se pudo actualizar el negocio');
       this.isLoandingEdi = false;
     });
-  
   }
+
+
 }

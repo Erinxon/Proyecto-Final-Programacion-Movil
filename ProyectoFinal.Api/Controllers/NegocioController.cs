@@ -104,9 +104,10 @@ namespace ProyectoFinal.Api.Controllers
             {
                 response.Message = ex.Message;
                 response.Succeeded = false;
+                return BadRequest(response);
             }
 
-            return response.Succeeded ? NoContent() : NotFound();
+            return Created("", response);
         }
 
         [HttpPut("{id:Guid}")]
@@ -132,15 +133,17 @@ namespace ProyectoFinal.Api.Controllers
                 {
                     response.Succeeded = false;
                     response.Message = "Negocio no encontrado";
+                    return NotFound(response);
                 }
                
             }
             catch (Exception ex)
             {
                 response.Succeeded = false;
+                return BadRequest(response);
             }
 
-            return response.Succeeded ? Ok(response) : NotFound(response);
+            return Ok(response);
         }
 
         [HttpDelete("{id:Guid}")]
@@ -159,6 +162,7 @@ namespace ProyectoFinal.Api.Controllers
                 {
                     response.Succeeded = false;
                     response.Message = "Negocio no encontrado";
+                    return NotFound(response);
                 }
 
             }
@@ -166,9 +170,10 @@ namespace ProyectoFinal.Api.Controllers
             {
                 response.Message = ex.Message;
                 response.Succeeded = false;
+                return BadRequest(response);
             }
 
-            return response.Succeeded ? Ok(response) : NotFound(response);
+            return Ok(response);
         }
 
     }

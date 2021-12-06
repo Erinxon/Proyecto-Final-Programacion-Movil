@@ -46,6 +46,7 @@ namespace ProyectoFinal.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProyectoFinal.Api", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +62,18 @@ namespace ProyectoFinal.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProyectoFinal.Api v1"));
+            }
+            else
+            {
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();

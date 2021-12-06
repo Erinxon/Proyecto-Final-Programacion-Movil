@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AlertController } from "@ionic/angular";
 import { NegocioService } from "src/app/services/negocio.service";
 import { PhotoService } from "src/app/services/photo.service";
 
@@ -12,7 +13,8 @@ export class BaseComponent {
   isAgregandoImagen: boolean = false;
   isLoanding: boolean = false;
   constructor(protected negocioService: NegocioService, 
-    protected fb:  FormBuilder, protected photoService: PhotoService) {
+    protected fb:  FormBuilder, protected photoService: PhotoService,
+    protected alert: AlertController) {
     this.form = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]],
       tipoNegocio: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]],
@@ -34,5 +36,13 @@ export class BaseComponent {
     });
   }
 
+  async showAlert(header: string, message: string) {
+    const alert = await this.alert.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
 }

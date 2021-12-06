@@ -1,11 +1,32 @@
-.avatar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    background-color: #4854e0;
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #4854e0;
 }
 
 .alert-wrapper {
-    background: #e5e5e5;
-  }
+  background: #e5e5e5;
+}
+
+.navigate{
+    color: #0d8a3f;
+    font-weight: 500;
+}
+
+.eye{
+    color: #4854e0;
+    font-weight: 500;
+}
+
+.edit{
+    color: #ffc409;
+    font-weight: 500;
+}
+
+.trash{
+    color: #eb445a;
+    font-weight: 500;
+}
+

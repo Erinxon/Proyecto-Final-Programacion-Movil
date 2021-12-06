@@ -16,9 +16,9 @@ export class NegociosPage implements OnInit {
   loanding: boolean = false;
   isToEdit: boolean = false;
   parameter: RequestParameter = {
-    pageNumber:1,
+    pageNumber: 1,
     pageSize: 10,
-  }
+  };
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   constructor(
     private negocioService: NegocioService,
@@ -72,8 +72,13 @@ export class NegociosPage implements OnInit {
           text: 'Si',
           handler: () => {
             this.negocioService.deleteNegocio(id).subscribe((res) => {
-               this.negocios = this.negocios.filter((negocio) => negocio.id != id);
-               this.lengthNegocios--; 
+              this.negocios = this.negocios.filter(
+                (negocio) => negocio.id != id
+              );
+              this.parameter.pageNumber = 1;
+              this.parameter.pageSize = 10;
+              this.negocios = null;
+              this.getNegocios();
             });
           },
         },
@@ -83,32 +88,28 @@ export class NegociosPage implements OnInit {
   }
 
   toEdit(negocio: Negocio) {
-    this.negocios= null;
+    this.negocios = null;
     this.isToEdit = true;
-    this.router.navigate(['/negocios/editar-negocio',negocio.id]);
+    this.router.navigate(['/negocios/editar-negocio', negocio.id]);
   }
 
   getNegociosInfiteScroll() {
-    this.negocioService.getNegocios(this.parameter).subscribe(
-      (res) => {
-        this.lengthNegocios = res.totalRegistros;
-        this.negocios = [...this.negocios, ...res.data];
-      });
+    this.negocioService.getNegocios(this.parameter).subscribe((res) => {
+      this.lengthNegocios = res.totalRegistros;
+      this.negocios = [...this.negocios, ...res.data];
+    });
   }
 
-  loadData(event){
-    setTimeout(() => {
-      this.parameter.pageNumber++;
-      this.getNegociosInfiteScroll();
-      event.target.complete(); 
-      if (this.negocios.length == this.lengthNegocios) {
-        event.target.disabled = true; 
-      }
-    }, 700);
-  }
-
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  loadData(event) {
+    this.parameter.pageNumber++;
+    this.negocioService.getNegocios(this.parameter).subscribe((res) => {
+      this.lengthNegocios = res.totalRegistros;
+      this.negocios = [...this.negocios, ...res.data];
+      if(event)event.target.complete();
+    });
+    if (this.negocios.length == this.lengthNegocios) {
+      event.target.disabled = true;
+    }
   }
 
 }

@@ -39,6 +39,7 @@ export class AgregarNegocioPage extends BaseComponent implements OnInit {
     this.negocioService.addNegocio(negocio).subscribe(res => {
       this.isLoanding = false;
       this.showAlert('Negocio agregado', 'El negocio se ha agregado correctamente');
+      this.reset();
     }, err => {
       this.showAlert('Error', 'Ocurrio un error al agregar el negocio');
       this.isLoanding = false;
